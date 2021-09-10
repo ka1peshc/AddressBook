@@ -6,9 +6,9 @@ namespace AddressBook
 {
     class Contact
     {
-        private string firstname, lastname, address, City, State, Email;
-        private int  zipNo;
-        private long Phonenumber;
+        public string firstname, lastname, address, City, State, Email;
+        public int  zipNo;
+        public long Phonenumber;
         public Contact(string fn, string ln, string addr, string city, string state, string email, long PhNo, int zip)
         {
             firstname = fn;
