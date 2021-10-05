@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBook
@@ -110,6 +111,18 @@ namespace AddressBook
                     }
                 }
             }
+        }
+
+        internal void DisplayPersonName(IDictionary<string, Contact> addressBook)
+        {
+            Console.WriteLine("Enter state name or city name");
+            string name = Console.ReadLine();
+            var result = addressBook.Where(p => p.Value.City == name || p.Value.State == name);
+            foreach(var i in result)
+            {
+                Console.WriteLine("key : {0}\tPerson names : {1} {2} ",i.Key,i.Value.Firstname,i.Value.Lastname);
+            }
+            
         }
         internal bool editNameInAddressBook(string key, string currentName, string editToName, IDictionary<string, Contact> addressBook)
         {

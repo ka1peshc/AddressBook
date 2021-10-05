@@ -17,7 +17,8 @@ namespace AddressBook
             while (xyz)
             {
                 Console.WriteLine("select option");
-                Console.WriteLine("1. Add new contact \n2. Update contact \n3. Delete contact\n4. Display Record\n5. Exit program");
+                Console.WriteLine("1. Add new contact \n2. Update contact \n3. Delete contact" +
+                    "\n4. Display All Record\n5. Display person based on state or City\n6. Exit program");
                 int option = int.Parse(Console.ReadLine());
                 switch (option) {
                     case 1:
@@ -33,6 +34,9 @@ namespace AddressBook
                         crudContact.displayAddressBook(addressBook);
                         break;
                     case 5:
+                        crudContact.DisplayPersonName(addressBook);
+                        break;
+                    case 6:
                         return;
                     default:
                         xyz = false;
