@@ -1,2 +1,16 @@
 2021-10-05 15:35:34.5645 | Info ~ Added new Person Record | 
 2021-10-05 15:35:59.6072 | Info ~ Added new Person Record | 
+2021-10-06 08:19:34.6295 | Info ~ Added new Person Record | 
+2021-10-06 08:21:10.3473 | Info ~ Added new Person Record | 
+2021-10-06 08:26:15.0625 | Info ~ Added new Person Record | 
+2021-10-06 08:27:31.7284 | Info ~ Added new Person Record | 
+2021-10-06 08:27:51.9466 | Info ~ Added new Person Record | 
+2021-10-06 08:29:45.3294 | Info ~ Added new Person Record | 
+2021-10-06 08:30:04.8076 | Info ~ Added new Person Record | 
+2021-10-06 08:34:33.2748 | Info ~ Added new Person Record | 
+2021-10-06 08:34:51.4159 | Info ~ Added new Person Record | 
+2021-10-06 08:37:58.1513 | Info ~ Added new Person Record | 
+2021-10-06 08:38:12.8563 | Info ~ Added new Person Record | 
+2021-10-06 08:40:54.3601 | Info ~ Added new Person Record | 
+2021-10-06 08:41:04.9797 | Info ~ Added new Person Record | 
+2021-10-06 08:42:12.6041 | Error ~ trying to add duplicate name record | 

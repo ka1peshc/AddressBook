@@ -8,9 +8,14 @@ namespace AddressBook
     class CRUDoperationOnContact
     {
         private readonly NLogger nlog = new NLogger();
+        private readonly Dictionary<string, string> PersonAndCity = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> PersonAndState = new Dictionary<string, string>();
+        /// <summary>
+        /// Take input from user
+        /// </summary>
+        /// <param name="addressBook"></param>
         internal void takeInput(IDictionary<string, Contact> addressBook)
         {
-
             string Firstname, Lastname, Address, City, State, Email;
             int zipNo;
             long Phonenumber;
@@ -54,7 +59,15 @@ namespace AddressBook
                 addressBook.Add(temp, contact);
                 nlog.LogInfo("Added new Person Record");
             }
+            //Adding value to person and city
+            string fullname = Firstname + " " + Lastname;
+            PersonAndCity.Add(fullname, City);
+            PersonAndState.Add(fullname, State);
         }
+        /// <summary>
+        /// Display each record from AdressBook
+        /// </summary>
+        /// <param name="addressBook"></param>
         internal void displayAddressBook(IDictionary<string, Contact> addressBook)
         {
             foreach (KeyValuePair<string, Contact> kvp in addressBook)
@@ -67,6 +80,85 @@ namespace AddressBook
                 nlog.LogInfo("Called Display method");
             }
         }
+        /// <summary>
+        /// Display count of according to city name or state name
+        /// </summary>
+        /// <param name="addressBook"></param>
+        internal void DisplayCountOfPersonAccordingToCityORState(IDictionary<string, Contact> addressBook)
+        {
+            Console.WriteLine("Select option number \n1. City\n 2. State");
+            int opt = int.Parse(Console.ReadLine());
+            int count=0;
+            switch (opt) {
+                case 1:
+                    Console.WriteLine("Enter city name");
+                    string city = Console.ReadLine();
+                    var result = addressBook.Where(p => p.Value.City.Equals(city));
+                    foreach(var i in result)
+                    {
+                        count++;
+                    }
+                    Console.WriteLine("{0} count is {1}", city, count);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter city name");
+                    string state = Console.ReadLine();
+                    var result1 = addressBook.Where(p => p.Value.State.Equals(state));
+                    foreach (var i in result1)
+                    {
+                        count++;
+                    }
+                    Console.WriteLine("{0} count is {1}", state, count);
+                    break;
+
+            }
+
+        }
+        /// <summary>
+        /// Display full name person and city
+        /// </summary>
+        internal void DisplayPersonAndCity()
+        {
+            Console.WriteLine("Enter city name");
+            string name = Console.ReadLine();
+            var result = PersonAndCity.Where(p => p.Value.Equals(name));
+            foreach (var i in result)
+            {
+                Console.WriteLine("key : {0}\tcity names : {1}", i.Key, i.Value);
+            }
+        }
+        /// <summary>
+        /// Display full name person and state
+        /// </summary>
+        internal void DisplayPersonAndState()
+        {
+            Console.WriteLine("Enter state name");
+            string name = Console.ReadLine();
+            var result = PersonAndState.Where(p => p.Value.Equals(name));
+            foreach (var i in result)
+            {
+                Console.WriteLine("key : {0}\tstate names : {1}", i.Key, i.Value);
+            }
+        }
+        /// <summary>
+        /// Display person name using either state or city name.
+        /// </summary>
+        /// <param name="addressBook"></param>
+        internal void DisplayPersonName(IDictionary<string, Contact> addressBook)
+        {
+            Console.WriteLine("Enter state name or city name");
+            string name = Console.ReadLine();
+            var result = addressBook.Where(p => p.Value.City == name || p.Value.State == name);
+            foreach (var i in result)
+            {
+                Console.WriteLine("key : {0}\tPerson names : {1} {2} ", i.Key, i.Value.Firstname, i.Value.Lastname);
+            }
+        }
+
+        /// <summary>
+        /// update name value with the help of key
+        /// </summary>
+        /// <param name="addressBook"></param>
         internal void updateRecord(IDictionary<string, Contact> addressBook)
         {
             foreach (KeyValuePair<string, Contact> kvp in addressBook)
@@ -88,6 +180,10 @@ namespace AddressBook
                 crud.displayAddressBook(addressBook);
             }
         }
+        /// <summary>
+        /// delete record using key
+        /// </summary>
+        /// <param name="addressBook"></param>
         internal void deleteRecord(IDictionary<string, Contact> addressBook)
         {
             Console.WriteLine("Enter key you want to delete");
@@ -112,18 +208,15 @@ namespace AddressBook
                 }
             }
         }
-
-        internal void DisplayPersonName(IDictionary<string, Contact> addressBook)
-        {
-            Console.WriteLine("Enter state name or city name");
-            string name = Console.ReadLine();
-            var result = addressBook.Where(p => p.Value.City == name || p.Value.State == name);
-            foreach(var i in result)
-            {
-                Console.WriteLine("key : {0}\tPerson names : {1} {2} ",i.Key,i.Value.Firstname,i.Value.Lastname);
-            }
-            
-        }
+        
+        /// <summary>
+        /// Edit name of person using key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="currentName"></param>
+        /// <param name="editToName"></param>
+        /// <param name="addressBook"></param>
+        /// <returns></returns>
         internal bool editNameInAddressBook(string key, string currentName, string editToName, IDictionary<string, Contact> addressBook)
         {
             foreach (KeyValuePair<string, Contact> kvp in addressBook)
