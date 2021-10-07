@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace AddressBook
 {
     class CRUDoperationOnContact
     {
+        private const string FILEPATH = @"D:\Bridgelabz lecture\Dot net\Day 9 C# AddressBook\AddressBook\AddressBookRecord.txt";
         private readonly NLogger nlog = new NLogger();
         private readonly Dictionary<string, string> PersonAndCity = new Dictionary<string, string>();
         private readonly Dictionary<string, string> PersonAndState = new Dictionary<string, string>();
@@ -54,8 +56,14 @@ namespace AddressBook
                     result= false;
                 }
             }
-            if(result)
+
+            string addressRecord = "Key :" + temp + "\nPerson Name : " + Firstname + " " + Lastname + "\nAddress : " + Address + "," + City + "," + State + "," + zipNo + "\nPhone number : " + Phonenumber;
+
+            if (result)
             {
+                using StreamWriter sw = File.AppendText(FILEPATH);
+                sw.WriteLine(addressRecord);
+                sw.Close();
                 addressBook.Add(temp, contact);
                 nlog.LogInfo("Added new Person Record");
             }
@@ -239,6 +247,17 @@ namespace AddressBook
                 }
             }
             return false;
+        }
+
+        public void ReadFileUsingStreamReader()
+        {
+            using StreamReader sr = File.OpenText(FILEPATH);
+            string temp = "";
+            while((temp = sr.ReadLine()) != null)
+            {
+                Console.WriteLine(temp);
+            }
+            sr.Close();
         }
     }
 }

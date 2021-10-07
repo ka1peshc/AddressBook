@@ -20,7 +20,7 @@ namespace AddressBook
                 Console.WriteLine("1. Add new contact \n2. Update contact \n3. Delete contact" +
                     "\n4. Display All Record\n5. Display person based on state or City" +
                     "\n6. Display person name and city\n7. Display person name and state" +
-                    "\n8. Exit program");
+                    "\n8. Read File using StreamReader\n9. Exit program");
                 int option = int.Parse(Console.ReadLine());
                 switch (option) {
                     case 1:
@@ -45,6 +45,9 @@ namespace AddressBook
                         crudContact.DisplayPersonAndState();
                         break;
                     case 8:
+                        crudContact.ReadFileUsingStreamReader();
+                        break;
+                    case 9:
                         return;
                     default:
                         xyz = false;
